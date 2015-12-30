@@ -7,7 +7,7 @@ banger_array = []
 scheduler = Rufus::Scheduler.new
 
 scheduler.every '10d', :first_in => '0.1s' do
-	client = RedditKit::Client.new('x', 'x')
+	client = RedditKit::Client.new(ENV['REDDIT_USERNAME', ENV['REDDIT_PASSWORD'])
 	top_bangers = client.search('site:soundcloud.com', {
 		:subreddit => 'trap',
 		:time => 'month',
