@@ -1,7 +1,12 @@
 require 'sinatra'
 require 'redditkit'
+require 'rufus-scheduler'
 
-get '/' do
+banger_array = []
+
+scheduler = Rufus::Scheduler.new
+
+scheduler.every '10d', :first_in => '0.1s' do
 	client = RedditKit::Client.new('x', 'x')
 	top_bangers = client.search('site:soundcloud.com', {
 		:subreddit => 'trap',
@@ -10,6 +15,9 @@ get '/' do
 		:restrict_to_subreddit => true,
 		:limit => 50
 		})
+	banger_array = top_bangers.results.map { |banger| banger.url }
+end
 
-	top_bangers.results.map { |banger| banger.url }.sample
+get '/' do
+	banger_array.sample
 end
