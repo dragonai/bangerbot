@@ -19,5 +19,6 @@ scheduler.every '10d', :first_in => '0.1s' do
 end
 
 get '/' do
-	json { :response_type => "in_channel", :text => banger_array.sample }
+	content_type :json
+	{ :response_type => "in_channel", :text => banger_array.sample }.to_json
 end
