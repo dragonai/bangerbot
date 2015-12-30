@@ -21,5 +21,5 @@ end
 
 get '/' do
 	content_type :json
-	{ :response_type => "in_channel", :text => banger_array.sample }.to_json
+	{ :response_type => "in_channel", :text => banger_array.sample, :unfurl_media => true }.to_json
 end
