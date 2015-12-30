@@ -18,7 +18,9 @@ scheduler.every '10d', :first_in => '0.1s' do
 	banger_array = top_bangers.results.map { |banger| banger.url }
 end
 
-get '/' do
-	status 200
-	body { :response_type => "in_channel", :text => banger_array.sample }.to_json
+post '/' do
+	{
+		:response_type => "in_channel",
+		:text => banger_array.sample
+	}.to_json
 end
