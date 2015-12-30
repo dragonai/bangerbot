@@ -15,7 +15,8 @@ scheduler.every '10d', :first_in => '0.1s' do
 		:restrict_to_subreddit => true,
 		:limit => 50
 		})
-	banger_array = top_bangers.results.map { |banger| banger.url }
+	banger_array = top_bangers.results.map { |banger| banger.url.sub('https://', 'http://') }
+
 end
 
 get '/' do
